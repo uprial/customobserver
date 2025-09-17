@@ -32,9 +32,9 @@ A Minecraft (Bukkit) plugin that makes Observer work distance configurable
 I will be happy to add some features or fix bugs. My mail: uprial@gmail.com.
 
 ## Useful links
-* [Project on GitHub](TBD)
-* [Project on Bukkit Dev](TBD)
-* [Project on Spigot](TBD)
+* [Project on GitHub](https://github.com/uprial/customobserver/)
+* [Project on Bukkit Dev](https://legacy.curseforge.com/minecraft/bukkit-plugins/customobserver)
+* [Project on Spigot](https://www.spigotmc.org/resources/customobserver.128898/)
 
 ## Related projects
 * AutoMinecart: [Bukkit Dev](https://legacy.curseforge.com/minecraft/bukkit-plugins/auto-minecart/) [GitHub](https://github.com/uprial/autominecart), [Spigot](https://www.spigotmc.org/resources/autominecart.128389/)
