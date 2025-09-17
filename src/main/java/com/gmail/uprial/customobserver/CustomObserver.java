@@ -17,33 +17,46 @@ public final class CustomObserver extends JavaPlugin {
     private final File configFile = new File(getDataFolder(), CONFIG_FILE_NAME);
 
     private CustomLogger consoleLogger = null;
-    private CustomObserverConfig customObserverConfig = null;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         consoleLogger = new CustomLogger(getLogger());
-        customObserverConfig = loadConfig(getConfig(), consoleLogger);
 
-        getServer().getPluginManager().registerEvents(new ObserverListener(this, consoleLogger), this);
+        register(loadConfig(getConfig(), consoleLogger));
 
         getCommand(COMMAND_NS).setExecutor(new CustomObserverCommandExecutor(this));
         consoleLogger.info("Plugin enabled");
     }
 
-    public CustomObserverConfig getCustomObserverConfig() {
-        return customObserverConfig;
+    private void register(final CustomObserverConfig customObserverConfig) {
+        if(customObserverConfig.isEnabled()) {
+            getServer().getPluginManager().registerEvents(new ObserverListener(this, consoleLogger), this);
+        }
     }
 
-    void reloadConfig(CustomLogger userLogger) {
+    private void unregister() {
+        HandlerList.unregisterAll(this);
+    }
+
+    boolean reloadConfig(CustomLogger userLogger) {
         reloadConfig();
-        customObserverConfig = loadConfig(getConfig(), userLogger, consoleLogger);
+
+        final CustomObserverConfig customObserverConfig = loadConfig(getConfig(), consoleLogger, userLogger);
+        if(customObserverConfig != null) {
+            unregister();
+            register(customObserverConfig);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
+        unregister();
         consoleLogger.info("Plugin disabled");
     }
 

@@ -22,8 +22,9 @@ class CustomObserverCommandExecutor implements CommandExecutor {
 
             if((args.length >= 1) && (args[0].equalsIgnoreCase("reload"))) {
                 if (sender.hasPermission(COMMAND_NS + ".reload")) {
-                    plugin.reloadConfig(customLogger);
-                    customLogger.info("CustomObserver config reloaded.");
+                    if(plugin.reloadConfig(customLogger)) {
+                        customLogger.info("CustomObserver config reloaded.");
+                    }
                     return true;
                 }
             }

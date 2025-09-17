@@ -42,7 +42,7 @@ public class ObserverListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onSignChange(final SignChangeEvent event) {
-        if ((event.isCancelled()) || (!plugin.getCustomObserverConfig().isEnabled())) {
+        if (event.isCancelled()) {
             return;
         }
 
@@ -114,7 +114,7 @@ public class ObserverListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPhysics(final BlockPhysicsEvent event) {
-        if ((event.isCancelled()) || (!plugin.getCustomObserverConfig().isEnabled())) {
+        if (event.isCancelled()) {
             return;
         }
 
@@ -144,7 +144,7 @@ public class ObserverListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreak(final BlockBreakEvent event) {
-        if ((event.isCancelled()) || (!plugin.getCustomObserverConfig().isEnabled())) {
+        if (event.isCancelled()) {
             return;
         }
 
@@ -163,7 +163,7 @@ public class ObserverListener implements Listener {
     @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPistonExtend(final BlockPistonExtendEvent event) {
-        if ((event.isCancelled()) || (!plugin.getCustomObserverConfig().isEnabled())) {
+        if (event.isCancelled()) {
             return;
         }
 
@@ -177,7 +177,7 @@ public class ObserverListener implements Listener {
     @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPistonRetract(final BlockPistonRetractEvent event) {
-        if ((event.isCancelled()) || (!plugin.getCustomObserverConfig().isEnabled())) {
+        if (event.isCancelled()) {
             return;
         }
 
