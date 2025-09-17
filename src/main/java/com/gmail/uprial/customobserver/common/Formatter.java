@@ -1,31 +1,26 @@
 package com.gmail.uprial.customobserver.common;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class Formatter {
     public static String format(final Block block) {
-        return String.format("%s[%s:%d:%d:%d]",
+        return String.format("%s[%s]",
                 block.getType(),
-                block.getWorld().getName(),
-                block.getX(), block.getY(), block.getZ());
-    }
-
-    public static String format(final Entity entity) {
-        if (entity instanceof Player) {
-            return format((Player) entity);
-        }
-        return String.format("%s[%s:%.0f:%.0f:%.0f]",
-                entity.getType(),
-                entity.getWorld().getName(),
-                entity.getLocation().getX(), entity.getLocation().getY(), entity.getLocation().getZ());
+                format(block.getLocation()));
     }
 
     public static String format(final Player player) {
-        return String.format("%s[%s:%.0f:%.0f:%.0f]",
+        return String.format("%s[%s]",
                 player.getName(),
-                player.getWorld().getName(),
-                player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
+                format(player.getLocation()));
+    }
+
+    public static String format(final Location location) {
+        return String.format("%s:%.0f:%.0f:%.0f",
+                location.getWorld().getName(),
+                location.getX(), location.getY(), location.getZ());
     }
 }
