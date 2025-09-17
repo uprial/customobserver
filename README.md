@@ -6,7 +6,7 @@ Tested on Spigot-1.20.5, 1.21.
 
 ## Introduction
 
-Increases Observer work distance
+A Minecraft (Bukkit) plugin that increases Observer work distance
 
 ## Features
 
