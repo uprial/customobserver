@@ -263,7 +263,8 @@ public class ObserverListener implements Listener {
     }
 
     private void save() {
-        save(observers, "observers.txt");
+        //reverse map of targets
+        //save(observers, "observers.txt");
         save(targets, "targets.txt");
         save(signs, "signs.txt");
     }
@@ -290,9 +291,15 @@ public class ObserverListener implements Listener {
     }
 
     private void load() {
-        load(observers, "observers.txt");
+        //reverse map of targets
+        //load(observers, "observers.txt");
         load(targets, "targets.txt");
         load(signs, "signs.txt");
+
+        observers.clear();
+        for(Map.Entry<Location, Location> entry : targets.entrySet()) {
+            observers.put(entry.getValue(), entry.getKey());
+        }
     }
 
     private void load(final Map<Location, Location> map, final String filename) {
