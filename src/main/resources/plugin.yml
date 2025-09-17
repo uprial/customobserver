@@ -1,0 +1,14 @@
+name: CustomObserver
+main: com.gmail.uprial.customobserver.CustomObserver
+version: 0.1.0
+api-version: 1.20
+commands:
+  customobserver:
+      description: Reload CustomObserver config
+      usage: /customobserver help
+      permission:
+      permission-message:
+permissions:
+  customobserver.reload:
+        description: Gives access to CustomObserver 'reload' command
+        default: op
