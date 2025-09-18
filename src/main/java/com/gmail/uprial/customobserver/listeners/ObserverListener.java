@@ -81,7 +81,7 @@ public class ObserverListener implements Listener {
         } else if (distance < 2) {
             customLogger.debug(String.format("No natural distance: %d", distance));
             return;
-        } else if (distance > plugin.getServer().getSimulationDistance() * 16) {
+        } else if (distance > plugin.getServer().getViewDistance() * 16) {
             customLogger.debug(String.format("Too big distance: %d", distance));
             return;
         }

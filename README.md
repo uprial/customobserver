@@ -2,7 +2,7 @@
 
 ## Compatibility
 
-Tested on Spigot-1.20.5, 1.21.
+Tested on Spigot-1.14, 1.21.
 
 ## Introduction
 
@@ -11,7 +11,7 @@ A Minecraft (Bukkit) plugin that makes Observer work distance configurable
 ## Features
 
 1. Put a wall sign on an observer
-2. Write down a distance from 2 to the server simulation distance in blocks
+2. Write down a distance from 2 to the server view distance in blocks
 3. Check console for aiming confirmation
 
 ![CustomObserver Logo](images/customobserver-promo.png)
