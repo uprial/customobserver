@@ -185,11 +185,25 @@ public class ObserverListener implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onBlockRedstone(final BlockRedstoneEvent event) {
+        final Block block = event.getBlock();
+        if(block.getType().equals(Material.OBSERVER)
+            && storage.isObserverLocation(block.getLocation())
+            && !isPowered(block.getLocation())) {
+
+            event.setNewCurrent(0);
+            customLogger.debug(String.format("Cancelled %s", format(block)));
+        }
+    }
+
     private void onBreak(final List<Block> blocks) {
         for (final Block block : blocks) {
             onBreak(block, null);
         }
     }
+
+    private final Set<Location> powered = new HashSet<>();
 
     private void onBreak(final Block block, final Player player) {
         Location observerLocation = storage.getObserverLocationBySign(block.getLocation());
@@ -209,6 +223,8 @@ public class ObserverListener implements Listener {
         }
 
         if(verb != null) {
+            powered.remove(observerLocation);
+
             if (player != null) {
                 customLogger.info(String.format("OBSERVER[%s] %s by %s",
                         format(observerLocation), verb, format(player)));
@@ -231,14 +247,36 @@ public class ObserverListener implements Listener {
 
         final Observer observerData = (Observer) observer.getBlockData();
         if(observerData.isPowered() != isPowered) {
+            /*
+                Order is important, because in onBlockRedstone
+                I cancel unregistered power attempts.
+             */
+            if(isPowered) {
+                if (powered.contains(observerLocation)) {
+                    customLogger.error(String.format("Already powered: %s", format(observer)));
+                }
+                powered.add(observerLocation);
+            }
+
             observerData.setPowered(isPowered);
             observer.setBlockData(observerData);
+
+            if(!isPowered) {
+                if(!powered.contains(observerLocation)) {
+                    customLogger.error(String.format("Already not powered: %s", format(observer)));
+                }
+                powered.remove(observerLocation);
+            }
 
             customLogger.debug(String.format("%s power set to %b",
                     format(observer), isPowered));
 
             callback.run();
         }
+    }
+
+    private boolean isPowered(final Location observerLocation) {
+        return powered.contains(observerLocation);
     }
 
     private Block getBlockInDirection(final Block block,
